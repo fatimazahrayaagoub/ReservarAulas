@@ -7,9 +7,9 @@ import lombok.*;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "franjas_horarias")
 @Getter
 @Setter
+@Table(name = "franjas_horarias")
 @NoArgsConstructor
 public class FranjaHoraria {
 

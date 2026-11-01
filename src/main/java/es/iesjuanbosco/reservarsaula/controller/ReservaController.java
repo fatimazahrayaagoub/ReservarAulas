@@ -51,10 +51,6 @@ public class ReservaController {
             return ResponseEntity.badRequest().build();
         }
 
-        if (datos.fecha().isBefore(LocalDate.now())) {
-            return ResponseEntity.badRequest().build();
-        }
-
         Profesor profesor = profesorRepository.findById(datos.profesorId()).orElse(null);
         Aula aula = aulaRepository.findById(datos.aulaId()).orElse(null);
         FranjaHoraria franja = franjaHorariaRepository.findById(datos.franjaId()).orElse(null);
@@ -62,6 +58,13 @@ public class ReservaController {
         if (profesor == null || aula == null || franja == null) {
             return ResponseEntity.notFound().build();
         }
+
+
+        if (datos.fecha().isBefore(LocalDate.now())) {
+            return ResponseEntity.badRequest().build();
+        }
+
+
 
         boolean ocupada = reservaRepository
                 .existsByFechaAndAula_IdAulaAndFranjaHoraria_IdFranja(
